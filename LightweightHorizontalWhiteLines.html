@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Triple Monitor Abstract Lines</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: black;
+      height: 100%;
+      width: 100%;
+    }
+
+    .line {
+      position: absolute;
+      width: 100vw;
+      height: 2px;
+      background: white;
+      opacity: 0.05;
+      animation: drift linear infinite;
+    }
+
+    @keyframes drift {
+      0% {
+        transform: translateX(-100%);
+      }
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
+    /* Create multiple lines */
+    body::before, body::after {
+      content: "";
+      position: absolute;
+      width: 100vw;
+      height: 2px;
+      background: white;
+      opacity: 0.05;
+    }
+
+    .line:nth-child(1) { top: 10%; animation-duration: 30s; }
+    .line:nth-child(2) { top: 25%; animation-duration: 45s; }
+    .line:nth-child(3) { top: 40%; animation-duration: 60s; }
+    .line:nth-child(4) { top: 55%; animation-duration: 35s; }
+    .line:nth-child(5) { top: 70%; animation-duration: 50s; }
+    .line:nth-child(6) { top: 85%; animation-duration: 40s; }
+  </style>
+</head>
+<body>
+  <div class="line"></div>
+  <div class="line"></div>
+  <div class="line"></div>
+  <div class="line"></div>
+  <div class="line"></div>
+  <div class="line"></div>
+</body>
+</html>

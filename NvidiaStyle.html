@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NVIDIA HUD Wallpaper - Enhanced</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #0b0f0c;
+      font-family: 'Segoe UI', 'Consolas', monospace;
+      color: #a8ff60;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 2;
+    }
+
+    .time {
+      font-size: 5vw;
+      letter-spacing: 0.1em;
+      opacity: 0.95;
+      color: #e0ffe6;
+    }
+
+    .tagline {
+      margin-top: 1rem;
+      font-size: 2vw;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #76b900;
+      background: linear-gradient(90deg, #4a7f00, #76b900, #4a7f00);
+      background-size: 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shineText 4s linear infinite;
+    }
+
+    @keyframes shineText {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .specs {
+      position: absolute;
+      bottom: 10%;
+      left: 5%;
+      font-size: 1.2vw;
+      text-align: left;
+      line-height: 1.6;
+      color: #cce6cc;
+      opacity: 0.75;
+      z-index: 2;
+    }
+
+    .specs span {
+      display: block;
+    }
+
+    .specs .label {
+      color: #8df08d;
+    }
+
+    .specs .value {
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .nvidia-logo {
+      position: absolute;
+      bottom: 2%;
+      right: 2%;
+      width: 140px;
+      z-index: 1;
+      filter: drop-shadow(0 0 6px #76b900);
+    }
+
+    .nvidia-logo img {
+      width: 100%;
+      height: auto;
+      animation: shine 4s infinite linear;
+    }
+
+    @keyframes shine {
+      0% { filter: brightness(1); }
+      50% { filter: brightness(1.5); }
+      100% { filter: brightness(1); }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particleCanvas"></canvas>
+
+  <div class="center">
+    <div class="time" id="timeDisplay">00:00:00</div>
+    <div class="tagline">The way it's meant to be played</div>
+  </div>
+
+  <div class="specs">
+    <span><span class="label">CPU:</span> <span class="value">Intel Core i9-13900K (24C/32T, 5.8GHz Boost)</span></span>
+    <span><span class="label">GPU1:</span> <span class="value">NVIDIA RTX 4090 (24GB GDDR6X)</span></span>
+    <span><span class="label">GPU2:</span> <span class="value">NVIDIA RTX 3080 Ti (12GB GDDR6X)</span></span>
+    <span><span class="label">Memory:</span> <span class="value">64GB DDR5 @ 6000 MT/s</span></span>
+    <span><span class="label">Motherboard:</span> <span class="value">ASUS ROG Maximus Z790 Hero</span></span>
+    <span><span class="label">Cooling:</span> <span class="value">Corsair H150i Elite Capellix AIO</span></span>
+    <span><span class="label">PSU:</span> <span class="value">Corsair RM1200x Shift</span></span>
+  </div>
+
+  <div class="nvidia-logo">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Nvidia_logo.svg/320px-Nvidia_logo.svg.png" alt="NVIDIA Logo" />
+  </div>
+
+  <script>
+    const canvas = document.getElementById("particleCanvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particles = [];
+
+    window.addEventListener("mousemove", (e) => {
+      for (let i = 0; i < 3; i++) {
+        particles.push({
+          x: e.clientX,
+          y: e.clientY,
+          size: Math.random() * 6 + 4,
+          speedX: Math.random() * 3 - 1.5,
+          speedY: Math.random() * 3 - 1.5,
+          rotation: Math.random() * 360,
+          alpha: 1
+        });
+      }
+    });
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        let p = particles[i];
+        p.x += p.speedX;
+        p.y += p.speedY;
+        p.alpha -= 0.05;
+
+        if (p.alpha <= 0) {
+          particles.splice(i, 1);
+          continue;
+        }
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rotation * Math.PI) / 180);
+        ctx.beginPath();
+        ctx.moveTo(0, -p.size);
+        ctx.lineTo(p.size, p.size);
+        ctx.lineTo(-p.size, p.size);
+        ctx.closePath();
+        ctx.fillStyle = "rgba(118, 185, 0," + p.alpha + ")";
+        ctx.fill();
+        ctx.restore();
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    function updateTime() {
+      const now = new Date();
+      document.getElementById("timeDisplay").textContent = now.toLocaleTimeString("en-CA", { hour12: false });
+    }
+
+    setInterval(updateTime, 1000);
+    updateTime();
+  </script>
+</body>
+</html>
