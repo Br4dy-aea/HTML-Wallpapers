@@ -59,10 +59,20 @@
     .specs .label {
       color: #aaa;
     }
-    .specs .value {
-      color: #fff;
-      font-weight: bold;
-    }
+   
+	
+	.specs .value {
+	  color: #fff;
+	  font-weight: bold;
+	  animation: glimmer 4s ease-in-out infinite;
+	}
+
+	@keyframes glimmer {
+  0%, 100% { color: #fff; text-shadow: 0 0 0px red; }
+  50% { color: #ff3333; text-shadow: 0 0 10px red; }
+}
+
+	
     .amd-logo {
       position: absolute;
       bottom: 2%;
@@ -101,9 +111,9 @@
   </style>
 </head>
 <body>
-  <!-- New CPU Die Trace Canvas -->
+  
   <canvas id="chipCanvas"></canvas>
-  <!-- Ripple Canvas -->
+ 
   <canvas id="rippleCanvas"></canvas>
 
   <div class="center">
@@ -112,6 +122,7 @@
     <div class="tagline">Together We Advance<span class="cursor">_</span></div>
   </div>
 
+	// Change Specs Here 
   <div class="specs">
     <span><span class="label">CPU:</span> <span class="value">Ryzen 7 5700G (8C/16T, 4.6GHz Boost)</span></span>
     <span><span class="label">GPU1:</span> <span class="value">Radeon RX 7800 XT (16GB GDDR6)</span></span>
@@ -203,7 +214,7 @@
     setInterval(updateTime, 1000);
     updateTime();
 
-    // Hide welcome 2 mins
+    // Change welcome Duration Here
     setTimeout(() => {
       const welcomeEl = document.getElementById("welcome");
       if (welcomeEl) welcomeEl.style.display = "none";
