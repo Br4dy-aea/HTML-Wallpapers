@@ -4,4 +4,9 @@ These can be a better alternative for less powerful computers where you want all
 
 
 
-You can change the specs inside the HTML using Notepad++ So you don't have to keep mine. HTML has no way of dynamically getting this info so it's up to you to change it. 
+You can change the specs inside the HTML using Notepad++ So you don't have to keep mine. 
+
+HTML has no way of dynamically getting this info so it's up to you to change it. 
+
+
+Same goes for the Welcome message. Default is User and will dissapear after two minutes. 
