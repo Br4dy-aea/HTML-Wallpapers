@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>NVIDIA HUD Wallpaper - Enhanced</title>
+  <title>NVIDIA</title>
   <style>
     html, body {
       margin: 0;
@@ -101,12 +101,27 @@
       50% { filter: brightness(1.5); }
       100% { filter: brightness(1); }
     }
+	
+	
+	.welcome {
+      font-size: 2.5vw;
+      color: #ED1C24;
+      margin-bottom: 1rem;
+      animation: fadein 1s ease-in;
+    }
+
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+	
   </style>
 </head>
 <body>
   <canvas id="particleCanvas"></canvas>
 
   <div class="center">
+	<div id="welcome" class="welcome">Welcome, User</div>
     <div class="time" id="timeDisplay">00:00:00</div>
     <div class="tagline">The way it's meant to be played</div>
   </div>
@@ -186,6 +201,14 @@
 
     setInterval(updateTime, 1000);
     updateTime();
+	
+	setTimeout(() => {
+      const welcomeEl = document.getElementById("welcome");
+      if (welcomeEl) {
+        welcomeEl.style.display = "none";
+      }
+    }, 120000);
+	
   </script>
 </body>
 </html>
