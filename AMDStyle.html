@@ -97,6 +97,19 @@
     @keyframes blink {
       50% { opacity: 0; }
     }
+
+    .welcome {
+      font-size: 2.5vw;
+      color: #ED1C24;
+      margin-bottom: 1rem;
+      animation: fadein 1s ease-in;
+    }
+
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     </style>
     
 </head>
@@ -104,6 +117,7 @@
   <canvas id="rippleCanvas"></canvas>
 
   <div class="center">
+    <div id="welcome" class="welcome">Welcome, Brady</div>
     <div class="time" id="timeDisplay">00:00:00</div>
     <div class="tagline">Together We Advance<span class="cursor">_</span></div>
   </div>
@@ -167,6 +181,14 @@
     }
     setInterval(updateTime, 1000);
     updateTime();
+
+    setTimeout(() => {
+      const welcomeEl = document.getElementById("welcome");
+      if (welcomeEl) {
+        welcomeEl.style.display = "none";
+      }
+    }, 120000);
+
   </script>
 </body>
 </html>
