@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Intel Wallpaper</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      background: radial-gradient(ellipse at center, #0a0f1c 0%, #000 100%);
+      font-family: 'Consolas', monospace;
+      color: #00ccff;
+      overflow: hidden;
+    }
+	canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .scanlines::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.02),
+        rgba(255, 255, 255, 0.02) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 2;
+    }
+
+    .welcome {
+      font-size: 3vw;
+      color: #00ccff;
+      margin-bottom: 1rem;
+      animation: fadeIn 1.5s ease-out;
+    }
+
+    .time {
+      font-size: 5vw;
+      font-weight: bold;
+      color: #00ccff;
+      letter-spacing: 0.2em;
+      text-shadow: 0 0 10px #00ccff;
+    }
+
+    .tagline {
+      margin-top: 1rem;
+      font-size: 1.5vw;
+      text-transform: uppercase;
+      color: #00ccff;
+    }
+
+    .specs {
+      position: absolute;
+      top: 5%;
+      left: 5%;
+      font-size: 1.1vw;
+      line-height: 2;
+      z-index: 2;
+      color: #88e0ff;
+    }
+
+    .intel-logo {
+      position: absolute;
+      bottom: 2%;
+      right: 2%;
+      width: 140px;
+      z-index: 2;
+    }
+
+    .intel-logo img {
+      width: 100%;
+      height: auto;
+      filter: brightness(1.2);
+    }
+
+    @keyframes flicker {
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+      20%, 22%, 24%, 55% { opacity: 0.3; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+	
+	
+  </style>
+</head>
+<body class="scanlines">
+  <div class="specs">
+    <div>CPU: Intel Core i7-12700K (12C/20T)</div>
+    <div>GPU: Intel Arc A770 16GB</div>
+    <div>RAM: 64GB DDR5 @ 5200MHz</div>
+    <div>Motherboard: ASUS Z690-A WiFi</div>
+    <div>Cooling: Corsair H150i Elite</div>
+	<div>PSU: Corsair SF 1000W Platinum</div>
+  </div>
+
+  <div class="center">
+    <div class="welcome">WELCOME, USER</div>
+    <div class="time" id="clock">00:00:00</div>
+    <div class="tagline">POWERING THE FUTURE</div>
+  </div>
+
+  <div class="intel-logo">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWEAAACPCAMAAAAcGJqjAAAAw3pUWHRSYXcgcHJvZmlsZSB0eXBlIGV4aWYAAHjabVDbDcMgDPz3FB0BPwAzDmmI1A06fk3sSKHtIc4vOIxhvF8HPCYIBSRXLa2UZJAmjbo5mhz9ZExy8omC4eGaBz3iElmKzbKHWtzilY8Ll8VuXr4LPaOwrYUmoa9fQuSGZ0fT30OohRCTFzAEeo+vNK33L2wjrVDfMEl0bfsnrja9Pds7TDQYORkzqzfAc2fgbk42Rs52cK5uMRsT1xCzgfyb0wX4ADecWVNJj4wCAAABhGlDQ1BJQ0MgcHJvZmlsZQAAeJx9kT1Iw0AcxV/TlopUOthBxCFDFQS7VBHHUsUiWChthVYdTC79giYtSYqLo+BacPBjserg4qyrg6sgCH6AuAtOii5S4v+SQosYD4778e7e4+4dILRrTDV8cUDVTD2TTIj5wqoYeIUfIfgQw6TEjEYqu5iD6/i6h4evd1Ge5X7uzzGkFA0GeETiOGvoJvEG8eym2eC8TxxmFUkhPiee0umCxI9clx1+41y2WeCZYT2XmScOE4vlPpb7mFV0lXiGOKKoGuULeYcVzluc1VqTde/JXxgsaitZrtMcQxJLSCENETKaqKIGE1FaNVIMZGg/4eIftf1pcsnkqoKRYwF1qJBsP/gf/O7WKE3HnKRgAvC/WNbHOBDYBToty/o+tqzOCeB9Bq60nr/eBuY+SW/1tMgRENoGLq57mrwHXO4AI08NSZdsyUtTKJWA9zP6pgIwfAsMrjm9dfdx+gDkqKvlG+DgEJgoU/a6y7sH+nv790y3vx/fYHLSIYC/egAADXZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+Cjx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDQuNC4wLUV4aXYyIj4KIDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+CiAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIgogICAgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIKICAgIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIKICAgIHhtbG5zOkdJTVA9Imh0dHA6Ly93d3cuZ2ltcC5vcmcveG1wLyIKICAgIHhtbG5zOnRpZmY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vdGlmZi8xLjAvIgogICAgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIgogICB4bXBNTTpEb2N1bWVudElEPSJnaW1wOmRvY2lkOmdpbXA6ZjRlY2VkMDktYmRlMS00YTgzLWE0MzctN2UzMTc5YTJiMjIwIgogICB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjU2NDk2YjM2LWU0YjItNGQyYy1iMDA0LTQ0NGFkNmExMTA5NSIKICAgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjAwYWQwZGFmLTE5MzctNDBhZS1iOWYzLTMyNmI5OGIxMDVlOCIKICAgZGM6Rm9ybWF0PSJpbWFnZS9wbmciCiAgIEdJTVA6QVBJPSIyLjAiCiAgIEdJTVA6UGxhdGZvcm09IldpbmRvd3MiCiAgIEdJTVA6VGltZVN0YW1wPSIxNzQ3Mjg0ODEwODE3Nzg4IgogICBHSU1QOlZlcnNpb249IjIuMTAuMzgiCiAgIHRpZmY6T3JpZW50YXRpb249IjEiCiAgIHhtcDpDcmVhdG9yVG9vbD0iR0lNUCAyLjEwIgogICB4bXA6TWV0YWRhdGFEYXRlPSIyMDI1OjA1OjE1VDAwOjUzOjI3LTA0OjAwIgogICB4bXA6TW9kaWZ5RGF0ZT0iMjAyNTowNToxNVQwMDo1MzoyNy0wNDowMCI+CiAgIDx4bXBNTTpIaXN0b3J5PgogICAgPHJkZjpTZXE+CiAgICAgPHJkZjpsaQogICAgICBzdEV2dDphY3Rpb249InNhdmVkIgogICAgICBzdEV2dDpjaGFuZ2VkPSIvIgogICAgICBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjFiYWE3MDcwLWJjYWQtNGM5Zi1iN2E3LTdmZTI2N2E1YmZjYiIKICAgICAgc3RFdnQ6c29mdHdhcmVBZ2VudD0iR2ltcCAyLjEwIChXaW5kb3dzKSIKICAgICAgc3RFdnQ6d2hlbj0iMjAyNS0wNS0xNVQwMDo1MzozMCIvPgogICAgPC9yZGY6U2VxPgogICA8L3htcE1NOkhpc3Rvcnk+CiAgPC9yZGY6RGVzY3JpcHRpb24+CiA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgCjw/eHBhY2tldCBlbmQ9InciPz63glbwAAAAkFBMVEXizuP///8AaLUAx/0AY7MAXbEAZbTG2etYkccAYrMAYLIAXLBwn84/g8FsnM280uiYudvZ5/MQbrjw9/vg6/TT4vB7ptIAxP1/3f4bc7qu6v5Oi8X4/P4AVK0AUawAWa8Aarbp8vgqeb22zuapxeE1fr+MsdeStdlilspSjcalw+C3z+aBqtPD1urM8v+fvd2LwjS+AAAAAXRSTlMAQObYZgAAAAFiS0dEAIgFHUgAAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfpBQ8ENR4yKyjFAAAG4ElEQVR42u3d7a6jLBAAYOM7QzLMBewvwPu/ylfbnpMeBRxAK21nkt1sNtXiIyBfxWHQ0NDQ0DgmHFAsJpU5TJhMLHj3wH//JUJNV8JmjAWqsAqrsIYKq3DJZcQjqPBREeJNIhU+Trj2MlRYhVVYhVVYhVVYhVVYhVVYhVVYhVVYhVVYhVVYhVVYhXsTToUKq/CbCPcVKqzCKqzCKqzCKqzCKqzCKqzCKqzCKqzCKty9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" alt="Intel Logo">
+	
+  </div>
+
+  <script>
+    <script>
+    const canvas = document.getElementById('rippleCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let ripples = [];
+
+    window.addEventListener('mousemove', (e) => {
+      ripples.push({
+        x: e.clientX,
+        y: e.clientY,
+        radius: 0,
+        alpha: 0.5
+      });
+    });
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = ripples.length - 1; i >= 0; i--) {
+        const r = ripples[i];
+        r.radius += 2;
+        r.alpha -= 0.01;
+        if (r.alpha <= 0) {
+          ripples.splice(i, 1);
+          continue;
+        }
+        const gradient = ctx.createRadialGradient(r.x, r.y, 0, r.x, r.y, r.radius);
+        gradient.addColorStop(0, 'rgba(237, 28, 36, ' + r.alpha + ')');
+        gradient.addColorStop(1, 'rgba(237, 28, 36, 0)');
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(r.x, r.y, r.radius, 0, 2 * Math.PI);
+        ctx.fill();
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    function updateTime() {
+      const now = new Date();
+      document.getElementById("timeDisplay").textContent = now.toLocaleTimeString('en-CA', { hour12: false });
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+
+    setTimeout(() => {
+      const welcomeEl = document.getElementById("welcome");
+      if (welcomeEl) {
+        welcomeEl.style.display = "none";
+      }
+    }, 120000);
+
+  </script>
+
+  </script>
+</body>
+</html>
