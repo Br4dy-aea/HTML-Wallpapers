@@ -168,23 +168,23 @@
       requestAnimationFrame(animate);
     }
     animate();
+	
+  </script>
+<script>
+  function updateTime() {
+    const now = new Date();
+    document.getElementById("clock").textContent = now.toLocaleTimeString('en-CA', { hour12: false });
+  }
+  setInterval(updateTime, 1000);
+  updateTime();
 
-    function updateTime() {
-      const now = new Date();
-      document.getElementById("timeDisplay").textContent = now.toLocaleTimeString('en-CA', { hour12: false });
+  setTimeout(() => {
+    const welcomeEl = document.querySelector(".welcome");
+    if (welcomeEl) {
+      welcomeEl.style.display = "none";
     }
-    setInterval(updateTime, 1000);
-    updateTime();
+  }, 120000);
+</script>
 
-    setTimeout(() => {
-      const welcomeEl = document.getElementById("welcome");
-      if (welcomeEl) {
-        welcomeEl.style.display = "none";
-      }
-    }, 120000);
-
-  </script>
-
-  </script>
 </body>
 </html>
